@@ -1,10 +1,6 @@
 package org.test.reactive;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicLongFieldUpdater;
-
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -18,11 +14,11 @@ import org.reactivestreams.Subscription;
  *
  * @param <T>
  */
-public class ArrayPublisher<T> implements Publisher<T> {
+public class ArrayPublisherInline<T> implements Publisher<T> {
 
     private final T[] array;
 
-    public ArrayPublisher(T[] array) {
+    public ArrayPublisherInline(T[] array) {
         this.array = array;
     }
 
