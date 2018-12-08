@@ -23,3 +23,7 @@ dependencies {
     testCompile 'org.reactivestreams:reactive-streams-tck:1.0.2'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+jmh {
+    setDuplicateClassesStrategy(DuplicatesStrategy.INCLUDE)
+}

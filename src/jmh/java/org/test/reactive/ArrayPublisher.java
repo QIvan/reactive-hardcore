@@ -94,15 +94,17 @@ public class ArrayPublisher<T> implements Publisher<T> {
         void slowPath(long n) {
             int sent = 0;
             int idx = this.index;
+            T[] array = this.array;
+            int length = array.length;
             Subscriber<? super T> subscriber = this.subscriber;
 
             while (true) {
-                for (; sent < n && idx < this.array.length; sent++, idx++) {
+                for (; sent < n && idx < length; sent++, idx++) {
                     if (canceled) {
                         return;
                     }
 
-                    T element = this.array[idx];
+                    T element = array[idx];
 
                     if (element == null) {
                         subscriber.onError(new NullPointerException());
@@ -116,7 +118,7 @@ public class ArrayPublisher<T> implements Publisher<T> {
                     return;
                 }
 
-                if (idx == this.array.length) {
+                if (idx == length) {
                     subscriber.onComplete();
                     return;
                 }
@@ -137,14 +139,16 @@ public class ArrayPublisher<T> implements Publisher<T> {
 
         void fastPath() {
             int idx = this.index;
+            T[] array = this.array;
+            int length = array.length;
             Subscriber<? super T> subscriber = this.subscriber;
 
-            for (; idx < this.array.length; idx++) {
+            for (; idx < length; idx++) {
                 if (canceled) {
                     return;
                 }
 
-                T element = this.array[idx];
+                T element = array[idx];
 
                 if (element == null) {
                     subscriber.onError(new NullPointerException());
