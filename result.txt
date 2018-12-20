@@ -1,0 +1,1156 @@
+$ ./gradlew jmh
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.openjdk.jmh.util.Utils (file:/home/ivan/.gradle/caches/modules-2/files-2.1/org.openjdk.jmh/jmh-core/1.21/442447101f63074c61063858033fbfde8a076873/jmh-core-1.21.jar) to field java.io.PrintStream.charOut
+WARNING: Please consider reporting this to the maintainers of org.openjdk.jmh.util.Utils
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+
+> Task :jmh
+# JMH version: 1.21
+# VM version: JDK 11-BellSoft, OpenJDK 64-Bit Server VM, 11-BellSoft+0
+# VM invoker: /usr/lib/jvm/liberica-jdk-11/bin/java
+# VM options: <none>
+# Warmup: 6 iterations, 10 s each
+# Measurement: 3 iterations, 3 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.test.reactive.ArrayPublisherPerfTest.publisherPerformance
+# Parameters: (times = 1000000)
+
+# Run progress: 0.00% complete, ETA 00:04:36
+# Fork: 1 of 2
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+
+# Warmup Iteration   1: 48.673 ops/s
+# Warmup Iteration   2: 48.082 ops/s
+# Warmup Iteration   3: 47.931 ops/s
+# Warmup Iteration   4: 49.371 ops/s
+# Warmup Iteration   5: 49.468 ops/s
+# Warmup Iteration   6: 49.450 ops/s
+Iteration   1: 49.660 ops/sNG [1m 7s]
+Iteration   2: 49.670 ops/sNG [1m 10s]
+Iteration   3: 48.774 ops/sNG [1m 13s]
+
+> Task :jmh
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+# Run progress: 25.00% complete, ETA 00:03:42
+# Fork: 2 of 2
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+
+# Warmup Iteration   1: 49.001 ops/s
+# Warmup Iteration   2: 48.525 ops/ss]
+# Warmup Iteration   3: 49.070 ops/ss]
+# Warmup Iteration   4: 49.193 ops/ss]
+# Warmup Iteration   5: 48.424 ops/s]
+# Warmup Iteration   6: 48.955 ops/ss]
+Iteration   1: 48.436 ops/sNG [2m 21s]
+Iteration   2: 48.616 ops/sNG [2m 24s]
+Iteration   3: 48.583 ops/sNG [2m 27s]
+
+> Task :jmh
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+
+Result "org.test.reactive.ArrayPublisherPerfTest.publisherPerformance":
+  48.956 ±(99.9%) 1.568 ops/s [Average]
+  (min, avg, max) = (48.436, 48.956, 49.670), stdev = 0.559
+  CI (99.9%): [47.388, 50.525] (assumes normal distribution)
+
+Secondary result "org.test.reactive.ArrayPublisherPerfTest.publisherPerformance:·asm":
+PrintAssembly processed: 152039 total address lines.
+Perf output processed (skipped 62.909 seconds):
+ Column 1: cycles (9066 events)
+
+Hottest code regions (>10.00% "cycles" events):
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 576 (282 bytes) 
+
+              0x00007f057303db4b: jne    0x00007f057303df62
+              0x00007f057303db51: lea    (%r12,%r13,8),%rbx  ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@9 (line 97)
+              0x00007f057303db55: lea    (%r12,%r14,8),%rbp  ;*invokeinterface onNext {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+              0x00007f057303db59: mov    %rdx,0x30(%rsp)
+              0x00007f057303db5e: xor    %ecx,%ecx
+              0x00007f057303db60: xor    %eax,%eax
+              0x00007f057303db62: xor    %r8d,%r8d
+         ╭    0x00007f057303db65: jmpq   0x00007f057303dc7f
+  0.95%  │ ↗  0x00007f057303db6a: mov    0x30(%rsp),%rdx    ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@40 (line 103)
+  1.22%  │ │  0x00007f057303db6f: test   %edi,%edi
+         │ │  0x00007f057303db71: jne    0x00007f057303ddb2  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@43 (line 103)
+         │ │  0x00007f057303db77: cmp    %r11d,%r10d
+         │ │  0x00007f057303db7a: jae    0x00007f057303dd3c
+  0.01%  │ │  0x00007f057303db80: mov    0x10(%rbx,%r10,4),%edi  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@51 (line 107)
+  1.48%  │ │  0x00007f057303db85: test   %edi,%edi
+         │ │  0x00007f057303db87: je     0x00007f057303dde2  ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@56 (line 109)
+  1.29%  │ │  0x00007f057303db8d: mov    0xc(%rbp),%esi     ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │  0x00007f057303db90: test   %esi,%esi
+         │ │  0x00007f057303db92: je     0x00007f057303dd6a  ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.02%  │ │  0x00007f057303db98: mov    %r8d,0x1c(%rsp)
+  0.99%  │ │  0x00007f057303db9d: mov    %rdx,0x30(%rsp)
+  1.31%  │ │  0x00007f057303dba2: mov    %rax,0x28(%rsp)
+         │ │  0x00007f057303dba7: mov    %ecx,0x10(%rsp)
+  0.02%  │ │  0x00007f057303dbab: mov    %rbp,0x20(%rsp)
+  0.88%  │ │  0x00007f057303dbb0: mov    %rbx,0x8(%rsp)
+  1.28%  │ │  0x00007f057303dbb5: mov    %r14d,%ebp
+         │ │  0x00007f057303dbb8: mov    %r10d,0x14(%rsp)
+  0.02%  │ │  0x00007f057303dbbd: mov    %r11d,0x18(%rsp)
+  0.89%  │ │  0x00007f057303dbc2: mov    %r13d,0x40(%rsp)
+  1.26%  │ │  0x00007f057303dbc7: mov    %r9,(%rsp)
+         │ │  0x00007f057303dbcb: lea    (%r12,%rdi,8),%rdx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@51 (line 107)
+         │ │  0x00007f057303dbcf: shl    $0x3,%rsi
+  1.05%  │ │  0x00007f057303dbd3: callq  0x00007f056b561f00  ; ImmutableOopMap{rbp=NarrowOop [0]=Oop [8]=Oop [32]=Oop [64]=NarrowOop }
+         │ │                                                ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │                                                ;   {optimized virtual_call}
+  0.99%  │ │  0x00007f057303dbd8: mov    0x20(%rsp),%r9
+  1.42%  │ │  0x00007f057303dbdd: mov    0x10(%r9),%r11d    ;*getfield subscription {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@9 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007f057303dbe1: mov    0x8(%r12,%r11,8),%r8d  ; implicit exception: dispatches to 0x00007f057303df8a
+  1.07%  │ │  0x00007f057303dbe6: cmp    $0xf2c10,%r8d      ;   {metadata(&apos;org/test/reactive/ArrayPublisher$ArraySubscription&apos;)}
+         │ │  0x00007f057303dbed: jne    0x00007f057303dd7a  ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@11 (line 65)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  1.25%  │ │  0x00007f057303dbf3: shl    $0x3,%r11          ;*invokeinterface request {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │  0x00007f057303dbf7: mov    0x10(%r11),%r10    ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@11 (line 65)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.02%  │ │  0x00007f057303dbfb: movabs $0x7fffffffffffffff,%r8
+  1.03%  │ │  0x00007f057303dc05: cmp    %r8,%r10
+         │ │  0x00007f057303dc08: je     0x00007f057303de12  ;*ifne {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@20 (line 67)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  1.28%  │ │  0x00007f057303dc0e: mov    %r10,%rdx
+         │ │  0x00007f057303dc11: add    $0x1,%rdx          ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@26 (line 71)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.02%  │ │  0x00007f057303dc15: test   %rdx,%rdx
+         │ │  0x00007f057303dc18: jle    0x00007f057303de4e
+  0.90%  │ │  0x00007f057303dc1e: mov    %r10,%rax
+  1.05%  │ │  0x00007f057303dc21: lock cmpxchg %rdx,0x10(%r11)
+ 54.07%  │ │  0x00007f057303dc27: sete   %r8b
+  0.04%  │ │  0x00007f057303dc2b: movzbl %r8b,%r8d          ;*invokevirtual compareAndSetLong {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::compareAndSet@16 (line 464)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@44 (line 77)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  2.20%  │ │  0x00007f057303dc2f: test   %r8d,%r8d
+         │ │  0x00007f057303dc32: je     0x00007f057303de96
+  1.16%  │ │  0x00007f057303dc38: test   %r10,%r10
+         │ │  0x00007f057303dc3b: jle    0x00007f057303dcc8  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@47 (line 77)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │  0x00007f057303dc41: mov    0x108(%r15),%r11
+  0.04%  │ │  0x00007f057303dc48: mov    0x14(%rsp),%r10d
+  1.16%  │ │  0x00007f057303dc4d: inc    %r10d              ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@86 (line 102)
+  1.17%  │ │  0x00007f057303dc50: mov    0x1c(%rsp),%r8d
+         │ │  0x00007f057303dc55: inc    %r8d               ; ImmutableOopMap{rbp=NarrowOop [0]=Oop [8]=Oop [32]=Oop [64]=NarrowOop }
+         │ │                                                ;*goto {reexecute=1 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@89 (line 102)
+         │ │  0x00007f057303dc58: test   %eax,(%r11)        ;*goto {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@89 (line 102)
+         │ │                                                ;   {poll}
+  1.16%  │ │  0x00007f057303dc5b: mov    (%rsp),%r9
+  1.29%  │ │  0x00007f057303dc5f: mov    0x40(%rsp),%r13d
+         │ │  0x00007f057303dc64: mov    0x18(%rsp),%r11d
+  0.04%  │ │  0x00007f057303dc69: mov    %ebp,%r14d
+  0.99%  │ │  0x00007f057303dc6c: mov    0x8(%rsp),%rbx
+  1.11%  │ │  0x00007f057303dc71: mov    0x20(%rsp),%rbp
+  0.01%  │ │  0x00007f057303dc76: mov    0x10(%rsp),%ecx
+  0.28%  │ │  0x00007f057303dc7a: mov    0x28(%rsp),%rax    ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@25 (line 102)
+  0.77%  ↘ │  0x00007f057303dc7f: movzbl 0x18(%r9),%edi     ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+           │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@40 (line 103)
+  1.24%    │  0x00007f057303dc84: movslq %r8d,%rsi          ;*i2l {reexecute=0 rethrow=0 return_oop=0}
+           │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@26 (line 102)
+           │  0x00007f057303dc87: cmp    0x30(%rsp),%rsi
+          ╭│  0x00007f057303dc8c: jge    0x00007f057303dc97  ;*ifge {reexecute=0 rethrow=0 return_oop=0}
+          ││                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@29 (line 102)
+          ││  0x00007f057303dc8e: cmp    %r11d,%r10d
+          │╰  0x00007f057303dc91: jl     0x00007f057303db6a  ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+          │                                                 ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@93 (line 117)
+          ↘   0x00007f057303dc97: test   %edi,%edi
+              0x00007f057303dc99: jne    0x00007f057303deea  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+....................................................................................................
+ 88.46%  <total for region 1>
+
+....[Hottest Region 2]..............................................................................
+c2, level 4, org.openjdk.jmh.infra.Blackhole::consume, version 569 (75 bytes) 
+
+            # parm0:    rdx:rdx   = &apos;java/lang/Object&apos;
+            #           [sp+0x40]  (sp of caller)
+            0x00007f057303a740: mov    0x8(%rsi),%r10d
+            0x00007f057303a744: movabs $0x800000000,%r12
+            0x00007f057303a74e: add    %r12,%r10
+            0x00007f057303a751: xor    %r12,%r12
+            0x00007f057303a754: cmp    %r10,%rax
+            0x00007f057303a757: jne    0x00007f056b561c80  ;   {runtime_call ic_miss_stub}
+            0x00007f057303a75d: data16 xchg %ax,%ax
+          [Verified Entry Point]
+  1.14%     0x00007f057303a760: mov    %eax,-0x14000(%rsp)
+  1.06%     0x00007f057303a767: push   %rbp
+  1.32%     0x00007f057303a768: sub    $0x30,%rsp         ;*synchronization entry
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 307)
+  0.04%     0x00007f057303a76c: mov    %rdx,(%rsp)
+  0.92%     0x00007f057303a770: mov    %rsi,0x8(%rsp)
+  1.47%     0x00007f057303a775: mov    0xc4(%rsi),%ebp    ;*getfield tlrMask {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@1 (line 307)
+  0.02%     0x00007f057303a77b: imul   $0x19660d,0xc0(%rsi),%r11d
+  0.08%     0x00007f057303a786: add    $0x3c6ef35f,%r11d  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@15 (line 308)
+  1.16%     0x00007f057303a78d: mov    %r11d,0xc0(%rsi)   ;*putfield tlr {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@17 (line 308)
+  1.31%     0x00007f057303a794: and    %ebp,%r11d
+            0x00007f057303a797: test   %r11d,%r11d
+         ╭  0x00007f057303a79a: je     0x00007f057303a7ac  ;*return {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.openjdk.jmh.infra.Blackhole::consume@48 (line 314)
+  0.03%  │  0x00007f057303a79c: add    $0x30,%rsp
+  1.04%  │  0x00007f057303a7a0: pop    %rbp
+  1.24%  │  0x00007f057303a7a1: mov    0x108(%r15),%r10
+         │  0x00007f057303a7a8: test   %eax,(%r10)        ;   {poll_return}
+  0.06%  │  0x00007f057303a7ab: retq   
+         ↘  0x00007f057303a7ac: mov    0x118(%r15),%rbx
+            0x00007f057303a7b3: mov    %rbx,%r10
+            0x00007f057303a7b6: add    $0x20,%r10
+            0x00007f057303a7ba: cmp    0x128(%r15),%r10
+            0x00007f057303a7c1: jae    0x00007f057303aa1e  ;*putfield referent {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@6 (line 399)
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@3 (line 395)
+                                                          ; - java.lang.ref.WeakReference::&lt;init&gt;@2 (line 57)
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@33 (line 311)
+            0x00007f057303a7c7: mov    %r10,0x118(%r15)
+....................................................................................................
+ 10.88%  <total for region 2>
+
+....[Hottest Regions]...............................................................................
+ 88.46%         c2, level 4  org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 576 (282 bytes) 
+ 10.88%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 569 (75 bytes) 
+  0.09%           libjvm.so  ElfSymbolTable::lookup+0x150 (34 bytes) 
+  0.04%   [kernel.kallsyms]  native_write_msr_safe+0x8 (2 bytes) 
+  0.04%   [kernel.kallsyms]  apic_timer_interrupt+0x0 (0 bytes) 
+  0.03%   [kernel.kallsyms]  update_curr+0x40 (15 bytes) 
+  0.03%   [kernel.kallsyms]  _raw_spin_lock_irqsave+0xb (27 bytes) 
+  0.02%   [kernel.kallsyms]  update_blocked_averages+0x9e (0 bytes) 
+  0.02%   [kernel.kallsyms]  _raw_spin_lock+0x10 (0 bytes) 
+  0.02%   [kernel.kallsyms]  smp_apic_timer_interrupt+0xd (0 bytes) 
+  0.01%   [kernel.kallsyms]  read_tsc+0x9 (0 bytes) 
+  0.01%   [kernel.kallsyms]  x86_pmu_enable+0x26c (0 bytes) 
+  0.01%   [kernel.kallsyms]  account_user_time+0x4e (0 bytes) 
+  0.01%   [kernel.kallsyms]  __update_cpu_load+0x6b (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_curr+0x1a (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_cfs_shares+0x15 (0 bytes) 
+  0.01%   [kernel.kallsyms]  cpuacct_charge+0xd (0 bytes) 
+  0.01%   [kernel.kallsyms]  cpu_needs_another_gp+0x35 (0 bytes) 
+  0.01%   [kernel.kallsyms]  __remove_hrtimer+0x6 (0 bytes) 
+  0.01%   [kernel.kallsyms]  hrtimer_start_range_ns+0x2cb (0 bytes) 
+  0.23%  <...other 21 warm regions...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+ 88.46%         c2, level 4  org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 576 
+ 10.88%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 569 
+  0.09%           libjvm.so  ElfSymbolTable::lookup+0x150 
+  0.04%   [kernel.kallsyms]  apic_timer_interrupt+0x0 
+  0.04%   [kernel.kallsyms]  native_write_msr_safe+0x8 
+  0.03%   [kernel.kallsyms]  update_curr+0x40 
+  0.03%   [kernel.kallsyms]  _raw_spin_lock_irqsave+0xb 
+  0.02%   [kernel.kallsyms]  _raw_spin_lock+0x10 
+  0.02%   [kernel.kallsyms]  update_blocked_averages+0x9e 
+  0.02%   [kernel.kallsyms]  smp_apic_timer_interrupt+0xd 
+  0.01%           libjvm.so  _Copy_arrayof_conjoint_jshorts+0x0 
+  0.01%           libjvm.so  GangWorker::loop+0x3c 
+  0.01%   [kernel.kallsyms]  read_tsc+0x9 
+  0.01%   [kernel.kallsyms]  __update_cpu_load+0x6b 
+  0.01%   [kernel.kallsyms]  cpuacct_charge+0xd 
+  0.01%   [kernel.kallsyms]  update_wall_time+0x2e7 
+  0.01%   [kernel.kallsyms]  rb_erase+0x320 
+  0.01%   [kernel.kallsyms]  hrtimer_start_range_ns+0x2cb 
+  0.01%        libc-2.22.so  pthread_mutex_lock+0x0 
+  0.01%        libc-2.22.so  malloc+0x10 
+  0.23%  <...other 21 warm methods...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Distribution by Source]........................................................................
+ 99.34%         c2, level 4
+  0.42%   [kernel.kallsyms]
+  0.18%           libjvm.so
+  0.03%         interpreter
+  0.02%        libc-2.22.so
+....................................................................................................
+ 99.99%  <totals>
+
+PrintAssembly processed: 145249 total address lines.
+Perf output processed (skipped 62.368 seconds):
+ Column 1: cycles (9142 events)
+
+Hottest code regions (>10.00% "cycles" events):
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 553 (292 bytes) 
+
+              0x00007fd3d27c4dcb: jne    0x00007fd3d27c51e2
+              0x00007fd3d27c4dd1: lea    (%r12,%r14,8),%rbx  ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@9 (line 97)
+              0x00007fd3d27c4dd5: lea    (%r12,%r13,8),%rbp  ;*invokeinterface onNext {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+              0x00007fd3d27c4dd9: mov    %rdx,0x30(%rsp)
+              0x00007fd3d27c4dde: xor    %ecx,%ecx
+              0x00007fd3d27c4de0: xor    %eax,%eax
+              0x00007fd3d27c4de2: xor    %r8d,%r8d
+         ╭    0x00007fd3d27c4de5: jmpq   0x00007fd3d27c4eff
+  1.18%  │ ↗  0x00007fd3d27c4dea: mov    0x30(%rsp),%rdx    ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@40 (line 103)
+  1.25%  │ │  0x00007fd3d27c4def: test   %edi,%edi
+         │ │  0x00007fd3d27c4df1: jne    0x00007fd3d27c5032  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@43 (line 103)
+  0.01%  │ │  0x00007fd3d27c4df7: cmp    %r11d,%r10d
+         │ │  0x00007fd3d27c4dfa: jae    0x00007fd3d27c4fbc
+  0.01%  │ │  0x00007fd3d27c4e00: mov    0x10(%rbx,%r10,4),%edi  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@51 (line 107)
+  2.00%  │ │  0x00007fd3d27c4e05: test   %edi,%edi
+         │ │  0x00007fd3d27c4e07: je     0x00007fd3d27c5062  ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@56 (line 109)
+  1.28%  │ │  0x00007fd3d27c4e0d: mov    0xc(%rbp),%esi     ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007fd3d27c4e10: test   %esi,%esi
+         │ │  0x00007fd3d27c4e12: je     0x00007fd3d27c4fea  ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │  0x00007fd3d27c4e18: mov    %r8d,0x1c(%rsp)
+  0.95%  │ │  0x00007fd3d27c4e1d: mov    %rdx,0x30(%rsp)
+  1.31%  │ │  0x00007fd3d27c4e22: mov    %rax,0x28(%rsp)
+  0.03%  │ │  0x00007fd3d27c4e27: mov    %ecx,0x10(%rsp)
+  0.02%  │ │  0x00007fd3d27c4e2b: mov    %rbp,0x20(%rsp)
+  1.01%  │ │  0x00007fd3d27c4e30: mov    %rbx,0x8(%rsp)
+  1.15%  │ │  0x00007fd3d27c4e35: mov    %r13d,%ebp
+  0.01%  │ │  0x00007fd3d27c4e38: mov    %r10d,0x14(%rsp)
+  0.01%  │ │  0x00007fd3d27c4e3d: mov    %r11d,0x18(%rsp)
+  1.02%  │ │  0x00007fd3d27c4e42: mov    %r14d,0x40(%rsp)
+  0.94%  │ │  0x00007fd3d27c4e47: mov    %r9,(%rsp)
+  0.01%  │ │  0x00007fd3d27c4e4b: lea    (%r12,%rdi,8),%rdx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@51 (line 107)
+         │ │  0x00007fd3d27c4e4f: shl    $0x3,%rsi
+  0.94%  │ │  0x00007fd3d27c4e53: callq  0x00007fd3caceaf00  ; ImmutableOopMap{rbp=NarrowOop [0]=Oop [8]=Oop [32]=Oop [64]=NarrowOop }
+         │ │                                                ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │                                                ;   {optimized virtual_call}
+  1.35%  │ │  0x00007fd3d27c4e58: mov    0x20(%rsp),%r11
+  1.23%  │ │  0x00007fd3d27c4e5d: mov    0x10(%r11),%r10d   ;*getfield subscription {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@9 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007fd3d27c4e61: mov    0x8(%r12,%r10,8),%r8d  ; implicit exception: dispatches to 0x00007fd3d27c520a
+  1.10%  │ │  0x00007fd3d27c4e66: cmp    $0xf2c10,%r8d      ;   {metadata(&apos;org/test/reactive/ArrayPublisher$ArraySubscription&apos;)}
+         │ │  0x00007fd3d27c4e6d: jne    0x00007fd3d27c4ffa  ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@11 (line 65)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  1.31%  │ │  0x00007fd3d27c4e73: lea    (%r12,%r10,8),%r8  ;*invokeinterface request {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+         │ │  0x00007fd3d27c4e77: mov    0x10(%r8),%r10     ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@11 (line 65)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007fd3d27c4e7b: movabs $0x7fffffffffffffff,%r9
+  0.85%  │ │  0x00007fd3d27c4e85: cmp    %r9,%r10
+         │ │  0x00007fd3d27c4e88: je     0x00007fd3d27c5092  ;*ifne {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@20 (line 67)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  1.23%  │ │  0x00007fd3d27c4e8e: mov    %r10,%rdx
+         │ │  0x00007fd3d27c4e91: add    $0x1,%rdx          ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@26 (line 71)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007fd3d27c4e95: test   %rdx,%rdx
+         │ │  0x00007fd3d27c4e98: jle    0x00007fd3d27c50ce
+  1.10%  │ │  0x00007fd3d27c4e9e: mov    %r10,%rax
+  1.03%  │ │  0x00007fd3d27c4ea1: lock cmpxchg %rdx,0x10(%r8)
+ 53.31%  │ │  0x00007fd3d27c4ea7: sete   %r11b
+  0.08%  │ │  0x00007fd3d27c4eab: movzbl %r11b,%r11d        ;*invokevirtual compareAndSetLong {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::compareAndSet@16 (line 464)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@44 (line 77)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  2.41%  │ │  0x00007fd3d27c4eaf: test   %r11d,%r11d
+         │ │  0x00007fd3d27c4eb2: je     0x00007fd3d27c5116
+  1.17%  │ │  0x00007fd3d27c4eb8: test   %r10,%r10
+         │ │  0x00007fd3d27c4ebb: jle    0x00007fd3d27c4f48  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::request@47 (line 77)
+         │ │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@78 (line 114)
+  0.01%  │ │  0x00007fd3d27c4ec1: mov    0x108(%r15),%r11
+  0.01%  │ │  0x00007fd3d27c4ec8: mov    0x14(%rsp),%r10d
+  1.05%  │ │  0x00007fd3d27c4ecd: inc    %r10d              ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@86 (line 102)
+  1.17%  │ │  0x00007fd3d27c4ed0: mov    0x1c(%rsp),%r8d
+  0.01%  │ │  0x00007fd3d27c4ed5: inc    %r8d               ; ImmutableOopMap{rbp=NarrowOop [0]=Oop [8]=Oop [32]=Oop [64]=NarrowOop }
+         │ │                                                ;*goto {reexecute=1 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@89 (line 102)
+  0.01%  │ │  0x00007fd3d27c4ed8: test   %eax,(%r11)        ;*goto {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@89 (line 102)
+         │ │                                                ;   {poll}
+  1.17%  │ │  0x00007fd3d27c4edb: mov    (%rsp),%r9
+  1.16%  │ │  0x00007fd3d27c4edf: mov    0x40(%rsp),%r14d
+  0.01%  │ │  0x00007fd3d27c4ee4: mov    0x18(%rsp),%r11d
+  0.02%  │ │  0x00007fd3d27c4ee9: mov    %ebp,%r13d
+  0.90%  │ │  0x00007fd3d27c4eec: mov    0x8(%rsp),%rbx
+  1.28%  │ │  0x00007fd3d27c4ef1: mov    0x20(%rsp),%rbp
+         │ │  0x00007fd3d27c4ef6: mov    0x10(%rsp),%ecx
+         │ │  0x00007fd3d27c4efa: mov    0x28(%rsp),%rax    ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
+         │ │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@25 (line 102)
+  0.95%  ↘ │  0x00007fd3d27c4eff: movzbl 0x18(%r9),%edi     ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+           │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@40 (line 103)
+  1.42%    │  0x00007fd3d27c4f04: movslq %r8d,%rsi          ;*i2l {reexecute=0 rethrow=0 return_oop=0}
+           │                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@26 (line 102)
+  0.02%    │  0x00007fd3d27c4f07: cmp    0x30(%rsp),%rsi
+          ╭│  0x00007fd3d27c4f0c: jge    0x00007fd3d27c4f17  ;*ifge {reexecute=0 rethrow=0 return_oop=0}
+          ││                                                ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@29 (line 102)
+  0.01%   ││  0x00007fd3d27c4f0e: cmp    %r11d,%r10d
+          │╰  0x00007fd3d27c4f11: jl     0x00007fd3d27c4dea  ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+          │                                                 ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@93 (line 117)
+          ↘   0x00007fd3d27c4f17: test   %edi,%edi
+              0x00007fd3d27c4f19: jne    0x00007fd3d27c516a  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@96 (line 117)
+              0x00007fd3d27c4f1f: cmp    %r11d,%r10d
+              0x00007fd3d27c4f22: je     0x00007fd3d27c4f7d  ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.test.reactive.ArrayPublisher$ArraySubscription::slowPath@104 (line 121)
+              0x00007fd3d27c4f24: mov    0x10(%r9),%rdx     ;*getfield requested {reexecute=0 rethrow=0 return_oop=0}
+....................................................................................................
+ 88.56%  <total for region 1>
+
+....[Hottest Region 2]..............................................................................
+c2, level 4, org.openjdk.jmh.infra.Blackhole::consume, version 544 (75 bytes) 
+
+            # parm0:    rdx:rdx   = &apos;java/lang/Object&apos;
+            #           [sp+0x40]  (sp of caller)
+            0x00007fd3d27c12c0: mov    0x8(%rsi),%r10d
+            0x00007fd3d27c12c4: movabs $0x800000000,%r12
+            0x00007fd3d27c12ce: add    %r12,%r10
+            0x00007fd3d27c12d1: xor    %r12,%r12
+            0x00007fd3d27c12d4: cmp    %r10,%rax
+            0x00007fd3d27c12d7: jne    0x00007fd3caceac80  ;   {runtime_call ic_miss_stub}
+            0x00007fd3d27c12dd: data16 xchg %ax,%ax
+          [Verified Entry Point]
+  1.07%     0x00007fd3d27c12e0: mov    %eax,-0x14000(%rsp)
+  1.18%     0x00007fd3d27c12e7: push   %rbp
+  1.32%     0x00007fd3d27c12e8: sub    $0x30,%rsp         ;*synchronization entry
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 307)
+  0.01%     0x00007fd3d27c12ec: mov    %rdx,(%rsp)
+  0.90%     0x00007fd3d27c12f0: mov    %rsi,0x8(%rsp)
+  1.19%     0x00007fd3d27c12f5: mov    0xc4(%rsi),%ebp    ;*getfield tlrMask {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@1 (line 307)
+  0.02%     0x00007fd3d27c12fb: imul   $0x19660d,0xc0(%rsi),%r11d
+  0.02%     0x00007fd3d27c1306: add    $0x3c6ef35f,%r11d  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@15 (line 308)
+  0.92%     0x00007fd3d27c130d: mov    %r11d,0xc0(%rsi)   ;*putfield tlr {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@17 (line 308)
+  1.09%     0x00007fd3d27c1314: and    %ebp,%r11d
+            0x00007fd3d27c1317: test   %r11d,%r11d
+         ╭  0x00007fd3d27c131a: je     0x00007fd3d27c132c  ;*return {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.openjdk.jmh.infra.Blackhole::consume@48 (line 314)
+  0.01%  │  0x00007fd3d27c131c: add    $0x30,%rsp
+  1.05%  │  0x00007fd3d27c1320: pop    %rbp
+  1.19%  │  0x00007fd3d27c1321: mov    0x108(%r15),%r10
+         │  0x00007fd3d27c1328: test   %eax,(%r10)        ;   {poll_return}
+  0.03%  │  0x00007fd3d27c132b: retq   
+         ↘  0x00007fd3d27c132c: mov    0x118(%r15),%rbx
+            0x00007fd3d27c1333: mov    %rbx,%r10
+            0x00007fd3d27c1336: add    $0x20,%r10
+            0x00007fd3d27c133a: cmp    0x128(%r15),%r10
+            0x00007fd3d27c1341: jae    0x00007fd3d27c159e  ;*putfield referent {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@6 (line 399)
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@3 (line 395)
+                                                          ; - java.lang.ref.WeakReference::&lt;init&gt;@2 (line 57)
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@33 (line 311)
+            0x00007fd3d27c1347: mov    %r10,0x118(%r15)
+....................................................................................................
+ 10.02%  <total for region 2>
+
+....[Hottest Regions]...............................................................................
+ 88.56%         c2, level 4  org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 553 (292 bytes) 
+ 10.02%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 544 (75 bytes) 
+  0.35%   [kernel.kallsyms]  native_write_msr_safe+0xa (0 bytes) 
+  0.08%           libjvm.so  ElfSymbolTable::lookup+0x154 (25 bytes) 
+  0.04%  libpthread-2.22.so  pthread_cond_timedwait@@GLIBC_2.3.2+0x12f (21 bytes) 
+  0.02%   [kernel.kallsyms]  tick_program_event+0x5 (27 bytes) 
+  0.02%   [kernel.kallsyms]  futex_wait_queue_me+0xe9 (0 bytes) 
+  0.02%   [kernel.kallsyms]  entry_SYSCALL_64_after_swapgs+0x9 (27 bytes) 
+  0.02%   [kernel.kallsyms]  page_fault+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  __intel_pmu_enable_all+0x81 (0 bytes) 
+  0.01%   [kernel.kallsyms]  intel_bts_enable_local+0x17 (0 bytes) 
+  0.01%   [kernel.kallsyms]  native_read_msr_safe+0x8 (0 bytes) 
+  0.01%   [kernel.kallsyms]  __do_page_fault+0x1af (0 bytes) 
+  0.01%   [kernel.kallsyms]  __do_softirq+0x6 (0 bytes) 
+  0.01%   [kernel.kallsyms]  irq_enter+0x1d (0 bytes) 
+  0.01%   [kernel.kallsyms]  raw_notifier_call_chain+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  scheduler_tick+0x48 (0 bytes) 
+  0.01%   [kernel.kallsyms]  account_user_time+0x4e (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_curr+0x21 (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_curr+0x126 (0 bytes) 
+  0.73%  <...other 67 warm regions...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+ 88.56%         c2, level 4  org.test.reactive.ArrayPublisher$ArraySubscription::slowPath, version 553 
+ 10.02%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 544 
+  0.35%   [kernel.kallsyms]  native_write_msr_safe+0xa 
+  0.08%           libjvm.so  ElfSymbolTable::lookup+0x154 
+  0.04%  libpthread-2.22.so  pthread_cond_timedwait@@GLIBC_2.3.2+0x12f 
+  0.02%   [kernel.kallsyms]  entry_SYSCALL_64_after_swapgs+0x9 
+  0.02%   [kernel.kallsyms]  page_fault+0x0 
+  0.02%   [kernel.kallsyms]  tick_program_event+0x5 
+  0.02%   [kernel.kallsyms]  futex_wait_queue_me+0xe9 
+  0.01%           libjvm.so  Monitor::lock_without_safepoint_check+0x20 
+  0.01%   [kernel.kallsyms]  __intel_pmu_enable_all+0x81 
+  0.01%   [kernel.kallsyms]  rcu_bh_qs+0x0 
+  0.01%           libjvm.so  Thread::muxAcquire+0x19 
+  0.01%   [kernel.kallsyms]  apic_timer_interrupt+0x77 
+  0.01%           libjvm.so  G1YoungRemSetSamplingThread::run_service+0x65 
+  0.01%           libjvm.so  GraphKit::add_safepoint_edges+0x6b9 
+  0.01%           libjvm.so  WatcherThread::sleep+0xb3 
+  0.01%   [kernel.kallsyms]  __hrtimer_run_queues+0xcc 
+  0.01%   [kernel.kallsyms]  __note_gp_changes+0x5f 
+  0.01%   [kernel.kallsyms]  hrtimer_active+0x33 
+  0.73%  <...other 67 warm methods...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Distribution by Source]........................................................................
+ 98.58%         c2, level 4
+  0.90%   [kernel.kallsyms]
+  0.31%           libjvm.so
+  0.07%  libpthread-2.22.so
+  0.07%        libc-2.22.so
+  0.02%      hsdis-amd64.so
+  0.02%         c1, level 3
+  0.02%         interpreter
+  0.01%      perf-22448.map
+....................................................................................................
+ 99.99%  <totals>
+
+
+
+# JMH version: 1.21
+# VM version: JDK 11-BellSoft, OpenJDK 64-Bit Server VM, 11-BellSoft+0
+# VM invoker: /usr/lib/jvm/liberica-jdk-11/bin/java
+# VM options: <none>
+# Warmup: 6 iterations, 10 s each
+# Measurement: 3 iterations, 3 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.test.reactive.ArrayPublisherPerfTest.publisherPerformanceInline
+# Parameters: (times = 1000000)
+
+# Run progress: 50.00% complete, ETA 00:02:27
+# Fork: 1 of 2
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+
+# Warmup Iteration   1: 58.323 ops/s
+# Warmup Iteration   2: 57.787 ops/ss]
+# Warmup Iteration   3: 58.527 ops/ss]
+# Warmup Iteration   4: 57.986 ops/s]
+# Warmup Iteration   5: 58.014 ops/ss]
+# Warmup Iteration   6: 58.077 ops/ss]
+Iteration   1: 57.594 ops/sNG [3m 35s]
+Iteration   2: 58.562 ops/sNG [3m 38s]
+Iteration   3: 58.711 ops/sNG [3m 41s]
+
+> Task :jmh
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+# Run progress: 75.00% complete, ETA 00:01:13
+# Fork: 2 of 2
+# Preparing profilers: LinuxPerfAsmProfiler 
+# Profilers consume stdout and stderr from target VM, use -v EXTRA to copy to console
+
+# Warmup Iteration   1: 58.613 ops/s
+# Warmup Iteration   2: 59.328 ops/ss]
+# Warmup Iteration   3: 59.152 ops/s]
+# Warmup Iteration   4: 58.241 ops/ss]
+# Warmup Iteration   5: 58.468 ops/ss]
+# Warmup Iteration   6: 58.957 ops/ss]
+Iteration   1: 58.721 ops/sNG [4m 48s]
+Iteration   2: 59.331 ops/sNG [4m 51s]
+Iteration   3: 57.554 ops/sNG [4m 54s]
+
+> Task :jmh
+# Processing profiler results: LinuxPerfAsmProfiler 
+
+
+Result "org.test.reactive.ArrayPublisherPerfTest.publisherPerformanceInline":
+  58.412 ±(99.9%) 1.966 ops/s [Average]
+  (min, avg, max) = (57.554, 58.412, 59.331), stdev = 0.701
+  CI (99.9%): [56.446, 60.379] (assumes normal distribution)
+
+Secondary result "org.test.reactive.ArrayPublisherPerfTest.publisherPerformanceInline:·asm":
+PrintAssembly processed: 149959 total address lines.
+Perf output processed (skipped 62.739 seconds):
+ Column 1: cycles (9076 events)
+
+Hottest code regions (>10.00% "cycles" events):
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 555 (262 bytes) 
+
+                                                          ;*invokevirtual slowPath {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@85 (line 85)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+                                                          ;   {optimized virtual_call}
+            0x00007fd4a703cbe8: mov    0x18(%rsp),%r9
+            0x00007fd4a703cbed: mov    0xc(%rsp),%r10d    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@47 (line 73)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.01%  ↗  0x00007fd4a703cbf2: mov    0x108(%r15),%r11   ; ImmutableOopMap{r9=Oop [0]=Oop [8]=NarrowOop }
+         │                                                ;*goto {reexecute=1 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@83 (line 96)
+  0.82%  │  0x00007fd4a703cbf9: test   %eax,(%r11)        ;*goto {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@83 (line 96)
+         │                                                ;   {poll}
+  2.12%  │  0x00007fd4a703cbfc: mov    %r10d,%ebx
+  0.01%  │  0x00007fd4a703cbff: mov    (%rsp),%r10
+  0.01%  │  0x00007fd4a703cc03: mov    %ebp,%r11d
+  0.79%  │  0x00007fd4a703cc06: mov    0x8(%rsp),%r8d
+  2.20%  │  0x00007fd4a703cc0b: mov    %ebx,%ecx          ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@14 (line 96)
+         │  0x00007fd4a703cc0d: movzbl 0x18(%r10),%edi    ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@32 (line 97)
+  0.01%  │  0x00007fd4a703cc12: movslq %ecx,%rdx          ;*i2l {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@15 (line 96)
+  0.67%  │  0x00007fd4a703cc15: cmp    0x20(%rsp),%rdx
+         │  0x00007fd4a703cc1a: jge    0x00007fd4a703cd35  ;*ifge {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@18 (line 96)
+  2.16%  │  0x00007fd4a703cc20: mov    0x20(%r10),%ebx    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@24 (line 96)
+         │  0x00007fd4a703cc24: mov    0xc(%r12,%rbx,8),%esi  ; implicit exception: dispatches to 0x00007fd4a703cf6a
+  0.13%  │  0x00007fd4a703cc29: cmp    %esi,%r11d
+         │  0x00007fd4a703cc2c: jge    0x00007fd4a703cd35  ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@32 (line 97)
+  0.75%  │  0x00007fd4a703cc32: test   %edi,%edi
+         │  0x00007fd4a703cc34: jne    0x00007fd4a703cdea  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@35 (line 97)
+  1.84%  │  0x00007fd4a703cc3a: mov    0x20(%r10),%ebx    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@40 (line 101)
+         │  0x00007fd4a703cc3e: mov    0xc(%r12,%rbx,8),%edi  ; implicit exception: dispatches to 0x00007fd4a703cf76
+  0.01%  │  0x00007fd4a703cc43: cmp    %edi,%r11d
+         │  0x00007fd4a703cc46: jae    0x00007fd4a703cd88
+  0.76%  │  0x00007fd4a703cc4c: shl    $0x3,%rbx
+  1.82%  │  0x00007fd4a703cc50: mov    0x10(%rbx,%r11,4),%ebx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@45 (line 101)
+  1.52%  │  0x00007fd4a703cc55: test   %ebx,%ebx
+         │  0x00007fd4a703cc57: je     0x00007fd4a703ce0e  ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@50 (line 103)
+  0.02%  │  0x00007fd4a703cc5d: mov    0xc(%r9),%esi      ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.83%  │  0x00007fd4a703cc61: test   %esi,%esi
+         │  0x00007fd4a703cc63: je     0x00007fd4a703cdaa  ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.63%  │  0x00007fd4a703cc69: mov    %ecx,0x10(%rsp)
+  0.01%  │  0x00007fd4a703cc6d: mov    %r9,%rbp
+  0.02%  │  0x00007fd4a703cc70: mov    %r8d,0x8(%rsp)
+  0.69%  │  0x00007fd4a703cc75: mov    %r11d,0x14(%rsp)
+  1.94%  │  0x00007fd4a703cc7a: mov    %r10,(%rsp)
+  0.02%  │  0x00007fd4a703cc7e: lea    (%r12,%rbx,8),%rdx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@45 (line 101)
+  0.06%  │  0x00007fd4a703cc82: shl    $0x3,%rsi          ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.84%  │  0x00007fd4a703cc86: nop
+  1.65%  │  0x00007fd4a703cc87: callq  0x00007fd49f561f00  ; ImmutableOopMap{rbp=Oop [0]=Oop [8]=NarrowOop }
+         │                                                ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+         │                                                ;   {optimized virtual_call}
+  2.09%  │  0x00007fd4a703cc8c: mov    %rbp,%r9
+         │  0x00007fd4a703cc8f: mov    0x10(%r9),%r11d    ;*getfield subscription {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@9 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.01%  │  0x00007fd4a703cc93: mov    0x8(%r12,%r11,8),%r8d  ; implicit exception: dispatches to 0x00007fd4a703cf86
+  0.79%  │  0x00007fd4a703cc98: cmp    $0xf2c10,%r8d      ;   {metadata(&apos;org/test/reactive/ArrayPublisherInline$ArraySubscription&apos;)}
+         │  0x00007fd4a703cc9f: jne    0x00007fd4a703cdba  ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@11 (line 61)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  2.13%  │  0x00007fd4a703cca5: lea    (%r12,%r11,8),%rcx  ;*invokeinterface request {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.01%  │  0x00007fd4a703cca9: mov    0x10(%rcx),%r11    ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@11 (line 61)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.06%  │  0x00007fd4a703ccad: movabs $0x7fffffffffffffff,%r10
+  0.74%  │  0x00007fd4a703ccb7: cmp    %r10,%r11
+         │  0x00007fd4a703ccba: je     0x00007fd4a703ce32  ;*ifne {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@20 (line 63)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.99%  │  0x00007fd4a703ccc0: mov    %r11,%rdx
+         │  0x00007fd4a703ccc3: add    $0x1,%rdx          ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@26 (line 67)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.01%  │  0x00007fd4a703ccc7: test   %rdx,%rdx
+         │  0x00007fd4a703ccca: jle    0x00007fd4a703ce6a
+  0.71%  │  0x00007fd4a703ccd0: mov    %r11,%rax
+  1.64%  │  0x00007fd4a703ccd3: lock cmpxchg %rdx,0x10(%rcx)
+ 46.07%  │  0x00007fd4a703ccd9: sete   %r10b
+  0.04%  │  0x00007fd4a703ccdd: movzbl %r10b,%r10d        ;*invokevirtual compareAndSetLong {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::compareAndSet@16 (line 464)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@44 (line 73)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  2.59%  │  0x00007fd4a703cce1: test   %r10d,%r10d
+         │  0x00007fd4a703cce4: je     0x00007fd4a703ceaa  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@47 (line 73)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.95%  │  0x00007fd4a703ccea: mov    0x10(%rsp),%r10d
+  0.02%  │  0x00007fd4a703ccef: inc    %r10d              ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@77 (line 96)
+  0.82%  │  0x00007fd4a703ccf2: mov    0x14(%rsp),%ebp
+  1.90%  │  0x00007fd4a703ccf6: inc    %ebp               ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@80 (line 96)
+  0.01%  │  0x00007fd4a703ccf8: test   %r11,%r11
+         ╰  0x00007fd4a703ccfb: jg     0x00007fd4a703cbf2  ;*ifle {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@56 (line 78)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+            0x00007fd4a703cd01: mov    0x20(%rcx),%r11d   ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@62 (line 82)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+            0x00007fd4a703cd05: mov    0xc(%r12,%r11,8),%r8d  ;*arraylength {reexecute=0 rethrow=0 return_oop=0}
+....................................................................................................
+ 86.92%  <total for region 1>
+
+....[Hottest Region 2]..............................................................................
+c2, level 4, org.openjdk.jmh.infra.Blackhole::consume, version 550 (75 bytes) 
+
+            # parm0:    rdx:rdx   = &apos;java/lang/Object&apos;
+            #           [sp+0x40]  (sp of caller)
+            0x00007fd4a703a0c0: mov    0x8(%rsi),%r10d
+            0x00007fd4a703a0c4: movabs $0x800000000,%r12
+            0x00007fd4a703a0ce: add    %r12,%r10
+            0x00007fd4a703a0d1: xor    %r12,%r12
+            0x00007fd4a703a0d4: cmp    %r10,%rax
+            0x00007fd4a703a0d7: jne    0x00007fd49f561c80  ;   {runtime_call ic_miss_stub}
+            0x00007fd4a703a0dd: data16 xchg %ax,%ax
+          [Verified Entry Point]
+  0.07%     0x00007fd4a703a0e0: mov    %eax,-0x14000(%rsp)
+  2.55%     0x00007fd4a703a0e7: push   %rbp
+  0.03%     0x00007fd4a703a0e8: sub    $0x30,%rsp         ;*synchronization entry
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 307)
+  0.79%     0x00007fd4a703a0ec: mov    %rdx,(%rsp)
+  1.97%     0x00007fd4a703a0f0: mov    %rsi,0x8(%rsp)
+  0.09%     0x00007fd4a703a0f5: mov    0xc4(%rsi),%ebp    ;*getfield tlrMask {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@1 (line 307)
+  0.03%     0x00007fd4a703a0fb: imul   $0x19660d,0xc0(%rsi),%r11d
+  0.78%     0x00007fd4a703a106: add    $0x3c6ef35f,%r11d  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@15 (line 308)
+  2.12%     0x00007fd4a703a10d: mov    %r11d,0xc0(%rsi)   ;*putfield tlr {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@17 (line 308)
+  0.03%     0x00007fd4a703a114: and    %ebp,%r11d
+  0.03%     0x00007fd4a703a117: test   %r11d,%r11d
+         ╭  0x00007fd4a703a11a: je     0x00007fd4a703a12c  ;*return {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.openjdk.jmh.infra.Blackhole::consume@48 (line 314)
+  0.90%  │  0x00007fd4a703a11c: add    $0x30,%rsp
+  1.96%  │  0x00007fd4a703a120: pop    %rbp
+         │  0x00007fd4a703a121: mov    0x108(%r15),%r10
+  0.04%  │  0x00007fd4a703a128: test   %eax,(%r10)        ;   {poll_return}
+  0.69%  │  0x00007fd4a703a12b: retq   
+         ↘  0x00007fd4a703a12c: mov    0x118(%r15),%rbx
+            0x00007fd4a703a133: mov    %rbx,%r10
+            0x00007fd4a703a136: add    $0x20,%r10
+            0x00007fd4a703a13a: cmp    0x128(%r15),%r10
+            0x00007fd4a703a141: jae    0x00007fd4a703a39e  ;*putfield referent {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@6 (line 399)
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@3 (line 395)
+                                                          ; - java.lang.ref.WeakReference::&lt;init&gt;@2 (line 57)
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@33 (line 311)
+            0x00007fd4a703a147: mov    %r10,0x118(%r15)
+....................................................................................................
+ 12.10%  <total for region 2>
+
+....[Hottest Regions]...............................................................................
+ 86.92%         c2, level 4  org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 555 (262 bytes) 
+ 12.10%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 550 (75 bytes) 
+  0.17%   [kernel.kallsyms]  native_write_msr_safe+0xa (0 bytes) 
+  0.03%   [kernel.kallsyms]  perf_event_task_tick+0x64 (22 bytes) 
+  0.02%   [kernel.kallsyms]  __update_cpu_load+0x77 (6 bytes) 
+  0.02%   [kernel.kallsyms]  update_curr+0x34 (0 bytes) 
+  0.02%   [kernel.kallsyms]  apic_timer_interrupt+0x0 (0 bytes) 
+  0.02%           libjvm.so  ElfSymbolTable::lookup+0x163 (25 bytes) 
+  0.02%           libjvm.so  VMError::is_error_reported+0x0 (8 bytes) 
+  0.01%   [kernel.kallsyms]  enter_from_user_mode+0x6 (0 bytes) 
+  0.01%   [kernel.kallsyms]  native_sched_clock+0x4 (0 bytes) 
+  0.01%   [kernel.kallsyms]  exit_idle+0x27 (0 bytes) 
+  0.01%   [kernel.kallsyms]  native_apic_mem_write+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  ttwu_do_wakeup+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  scheduler_tick+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  account_user_time+0x2b (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_min_vruntime+0x0 (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_cfs_shares+0x2a (0 bytes) 
+  0.01%   [kernel.kallsyms]  update_blocked_averages+0x202 (0 bytes) 
+  0.01%   [kernel.kallsyms]  task_tick_fair+0x2e7 (0 bytes) 
+  0.54%  <...other 49 warm regions...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+ 86.92%         c2, level 4  org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 555 
+ 12.10%         c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 550 
+  0.17%   [kernel.kallsyms]  native_write_msr_safe+0xa 
+  0.03%   [kernel.kallsyms]  perf_event_task_tick+0x64 
+  0.02%   [kernel.kallsyms]  update_curr+0x34 
+  0.02%           libjvm.so  ElfSymbolTable::lookup+0x163 
+  0.02%           libjvm.so  VMError::is_error_reported+0x0 
+  0.02%   [kernel.kallsyms]  apic_timer_interrupt+0x0 
+  0.02%   [kernel.kallsyms]  __update_cpu_load+0x77 
+  0.01%           libjvm.so  Monitor::lock_without_safepoint_check+0x20 
+  0.01%         interpreter  invoke return entry points  
+  0.01%   [kernel.kallsyms]  __ext4_get_inode_loc+0xbb 
+  0.01%   [kernel.kallsyms]  native_apic_mem_write+0x0 
+  0.01%   [kernel.kallsyms]  update_wall_time+0x22b 
+  0.01%   [kernel.kallsyms]  ret_from_intr+0x1 
+  0.01%           libjvm.so  frame::sender+0x70 
+  0.01%   [kernel.kallsyms]  exit_idle+0x27 
+  0.01%           libjvm.so  Threads::possibly_parallel_threads_do+0x22 
+  0.01%   [kernel.kallsyms]  trigger_load_balance+0x49 
+  0.01%   [kernel.kallsyms]  cpuacct_charge+0x2e 
+  0.54%  <...other 49 warm methods...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Distribution by Source]........................................................................
+ 99.02%         c2, level 4
+  0.69%   [kernel.kallsyms]
+  0.18%           libjvm.so
+  0.04%         interpreter
+  0.02%        libc-2.22.so
+  0.01%      [nf_conntrack]
+  0.01%         c1, level 3
+  0.01%               [kvm]
+....................................................................................................
+ 99.99%  <totals>
+
+PrintAssembly processed: 147507 total address lines.
+Perf output processed (skipped 62.534 seconds):
+ Column 1: cycles (9077 events)
+
+Hottest code regions (>10.00% "cycles" events):
+
+....[Hottest Region 1]..............................................................................
+c2, level 4, org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 551 (260 bytes) 
+
+                                                          ;*invokevirtual slowPath {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@85 (line 85)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+                                                          ;   {optimized virtual_call}
+            0x00007f01ff03c0a8: mov    0x18(%rsp),%r9
+            0x00007f01ff03c0ad: mov    0xc(%rsp),%r10d    ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@47 (line 73)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.01%  ↗  0x00007f01ff03c0b2: mov    0x108(%r15),%r11   ; ImmutableOopMap{r9=Oop [0]=Oop [8]=NarrowOop }
+         │                                                ;*goto {reexecute=1 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@83 (line 96)
+  0.80%  │  0x00007f01ff03c0b9: test   %eax,(%r11)        ;*goto {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@83 (line 96)
+         │                                                ;   {poll}
+  2.20%  │  0x00007f01ff03c0bc: mov    %r10d,%ebx
+         │  0x00007f01ff03c0bf: mov    (%rsp),%r10
+  0.09%  │  0x00007f01ff03c0c3: mov    %ebp,%r11d
+  0.74%  │  0x00007f01ff03c0c6: mov    0x8(%rsp),%r8d
+  1.91%  │  0x00007f01ff03c0cb: mov    %ebx,%ecx          ;*iload_3 {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@14 (line 96)
+  0.01%  │  0x00007f01ff03c0cd: movzbl 0x18(%r10),%edi    ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@32 (line 97)
+  0.04%  │  0x00007f01ff03c0d2: movslq %ecx,%rdx          ;*i2l {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@15 (line 96)
+  0.71%  │  0x00007f01ff03c0d5: cmp    0x20(%rsp),%rdx
+         │  0x00007f01ff03c0da: jge    0x00007f01ff03c059  ;*ifge {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@18 (line 96)
+  1.98%  │  0x00007f01ff03c0e0: mov    0x20(%r10),%ebx    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@24 (line 96)
+  0.03%  │  0x00007f01ff03c0e4: mov    0xc(%r12,%rbx,8),%esi  ; implicit exception: dispatches to 0x00007f01ff03c3f2
+  0.09%  │  0x00007f01ff03c0e9: cmp    %esi,%r11d
+         │  0x00007f01ff03c0ec: jge    0x00007f01ff03c059  ;*getfield canceled {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@32 (line 97)
+  0.66%  │  0x00007f01ff03c0f2: test   %edi,%edi
+         │  0x00007f01ff03c0f4: jne    0x00007f01ff03c272  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@35 (line 97)
+  1.98%  │  0x00007f01ff03c0fa: mov    0x20(%r10),%ebx    ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@40 (line 101)
+  0.03%  │  0x00007f01ff03c0fe: mov    0xc(%r12,%rbx,8),%edi  ; implicit exception: dispatches to 0x00007f01ff03c3fe
+  0.01%  │  0x00007f01ff03c103: cmp    %edi,%r11d
+         │  0x00007f01ff03c106: jae    0x00007f01ff03c210
+  0.66%  │  0x00007f01ff03c10c: shl    $0x3,%rbx
+  1.84%  │  0x00007f01ff03c110: mov    0x10(%rbx,%r11,4),%ebx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@45 (line 101)
+  1.71%  │  0x00007f01ff03c115: test   %ebx,%ebx
+         │  0x00007f01ff03c117: je     0x00007f01ff03c296  ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@50 (line 103)
+  0.07%  │  0x00007f01ff03c11d: mov    0xc(%r9),%esi      ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.68%  │  0x00007f01ff03c121: test   %esi,%esi
+         │  0x00007f01ff03c123: je     0x00007f01ff03c232  ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.72%  │  0x00007f01ff03c129: mov    %ecx,0x10(%rsp)
+  0.01%  │  0x00007f01ff03c12d: mov    %r9,%rbp
+  0.01%  │  0x00007f01ff03c130: mov    %r8d,0x8(%rsp)
+  0.62%  │  0x00007f01ff03c135: mov    %r11d,0x14(%rsp)
+  1.73%  │  0x00007f01ff03c13a: mov    %r10,(%rsp)
+  0.01%  │  0x00007f01ff03c13e: lea    (%r12,%rbx,8),%rdx  ;*aaload {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@45 (line 101)
+  0.10%  │  0x00007f01ff03c142: shl    $0x3,%rsi          ;*getfield bh {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@1 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.67%  │  0x00007f01ff03c146: nop
+  1.88%  │  0x00007f01ff03c147: callq  0x00007f01f7561f00  ; ImmutableOopMap{rbp=Oop [0]=Oop [8]=NarrowOop }
+         │                                                ;*invokevirtual consume {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@5 (line 40)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+         │                                                ;   {optimized virtual_call}
+  2.05%  │  0x00007f01ff03c14c: mov    %rbp,%r9
+         │  0x00007f01ff03c14f: mov    0x10(%r9),%r11d    ;*getfield subscription {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@9 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.04%  │  0x00007f01ff03c153: mov    0x8(%r12,%r11,8),%r8d  ; implicit exception: dispatches to 0x00007f01ff03c40e
+  0.77%  │  0x00007f01ff03c158: cmp    $0xf2c10,%r8d      ;   {metadata(&apos;org/test/reactive/ArrayPublisherInline$ArraySubscription&apos;)}
+         │  0x00007f01ff03c15f: jne    0x00007f01ff03c242  ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@11 (line 61)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.82%  │  0x00007f01ff03c165: lea    (%r12,%r11,8),%rcx  ;*invokeinterface request {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+         │  0x00007f01ff03c169: mov    0x10(%rcx),%r11    ;*invokevirtual getLongVolatile {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::get@13 (line 484)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@11 (line 61)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.10%  │  0x00007f01ff03c16d: movabs $0x7fffffffffffffff,%r10
+  0.67%  │  0x00007f01ff03c177: cmp    %r10,%r11
+         │  0x00007f01ff03c17a: je     0x00007f01ff03c2ba  ;*ifne {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@20 (line 63)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.78%  │  0x00007f01ff03c180: mov    %r11,%rdx
+         │  0x00007f01ff03c183: add    $0x1,%rdx          ;*ladd {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@26 (line 67)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  0.06%  │  0x00007f01ff03c187: test   %rdx,%rdx
+         │  0x00007f01ff03c18a: jle    0x00007f01ff03c2f2
+  1.02%  │  0x00007f01ff03c190: mov    %r11,%rax
+  1.85%  │  0x00007f01ff03c193: lock cmpxchg %rdx,0x10(%rcx)
+ 46.38%  │  0x00007f01ff03c199: sete   %r10b
+  0.08%  │  0x00007f01ff03c19d: movzbl %r10b,%r10d        ;*invokevirtual compareAndSetLong {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - java.util.concurrent.atomic.AtomicLongFieldUpdater$CASUpdater::compareAndSet@16 (line 464)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@44 (line 73)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  2.63%  │  0x00007f01ff03c1a1: test   %r10d,%r10d
+         │  0x00007f01ff03c1a4: je     0x00007f01ff03c332  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@47 (line 73)
+         │                                                ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+  1.93%  │  0x00007f01ff03c1aa: mov    0x10(%rsp),%r10d
+  0.03%  │  0x00007f01ff03c1af: inc    %r10d              ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@77 (line 96)
+  0.93%  │  0x00007f01ff03c1b2: mov    0x14(%rsp),%ebp
+  1.87%  │  0x00007f01ff03c1b6: inc    %ebp               ;*iinc {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@80 (line 96)
+         │  0x00007f01ff03c1b8: test   %r11,%r11
+         ╰  0x00007f01ff03c1bb: jg     0x00007f01ff03c0b2  ;*ifle {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@56 (line 78)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+            0x00007f01ff03c1c1: mov    0x20(%rcx),%r11d   ;*getfield array {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::request@62 (line 82)
+                                                          ; - org.test.reactive.PerfSubscriber::onNext@13 (line 41)
+                                                          ; - org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath@72 (line 108)
+....................................................................................................
+ 87.03%  <total for region 1>
+
+....[Hottest Region 2]..............................................................................
+c2, level 4, org.openjdk.jmh.infra.Blackhole::consume, version 544 (75 bytes) 
+
+            # parm0:    rdx:rdx   = &apos;java/lang/Object&apos;
+            #           [sp+0x40]  (sp of caller)
+            0x00007f01ff038bc0: mov    0x8(%rsi),%r10d
+            0x00007f01ff038bc4: movabs $0x800000000,%r12
+            0x00007f01ff038bce: add    %r12,%r10
+            0x00007f01ff038bd1: xor    %r12,%r12
+            0x00007f01ff038bd4: cmp    %r10,%rax
+            0x00007f01ff038bd7: jne    0x00007f01f7561c80  ;   {runtime_call ic_miss_stub}
+            0x00007f01ff038bdd: data16 xchg %ax,%ax
+          [Verified Entry Point]
+  0.06%     0x00007f01ff038be0: mov    %eax,-0x14000(%rsp)
+  2.58%     0x00007f01ff038be7: push   %rbp
+  0.03%     0x00007f01ff038be8: sub    $0x30,%rsp         ;*synchronization entry
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@-1 (line 307)
+  0.83%     0x00007f01ff038bec: mov    %rdx,(%rsp)
+  1.97%     0x00007f01ff038bf0: mov    %rsi,0x8(%rsp)
+  0.02%     0x00007f01ff038bf5: mov    0xc4(%rsi),%ebp    ;*getfield tlrMask {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@1 (line 307)
+  0.08%     0x00007f01ff038bfb: imul   $0x19660d,0xc0(%rsi),%r11d
+  0.79%     0x00007f01ff038c06: add    $0x3c6ef35f,%r11d  ;*iadd {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@15 (line 308)
+  1.74%     0x00007f01ff038c0d: mov    %r11d,0xc0(%rsi)   ;*putfield tlr {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@17 (line 308)
+  0.01%     0x00007f01ff038c14: and    %ebp,%r11d
+  0.04%     0x00007f01ff038c17: test   %r11d,%r11d
+         ╭  0x00007f01ff038c1a: je     0x00007f01ff038c2c  ;*return {reexecute=0 rethrow=0 return_oop=0}
+         │                                                ; - org.openjdk.jmh.infra.Blackhole::consume@48 (line 314)
+  0.83%  │  0x00007f01ff038c1c: add    $0x30,%rsp
+  1.80%  │  0x00007f01ff038c20: pop    %rbp
+         │  0x00007f01ff038c21: mov    0x108(%r15),%r10
+  0.03%  │  0x00007f01ff038c28: test   %eax,(%r10)        ;   {poll_return}
+  0.90%  │  0x00007f01ff038c2b: retq   
+         ↘  0x00007f01ff038c2c: mov    0x118(%r15),%rbx
+            0x00007f01ff038c33: mov    %rbx,%r10
+            0x00007f01ff038c36: add    $0x20,%r10
+            0x00007f01ff038c3a: cmp    0x128(%r15),%r10
+            0x00007f01ff038c41: jae    0x00007f01ff038e9e  ;*putfield referent {reexecute=0 rethrow=0 return_oop=0}
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@6 (line 399)
+                                                          ; - java.lang.ref.Reference::&lt;init&gt;@3 (line 395)
+                                                          ; - java.lang.ref.WeakReference::&lt;init&gt;@2 (line 57)
+                                                          ; - org.openjdk.jmh.infra.Blackhole::consume@33 (line 311)
+            0x00007f01ff038c47: mov    %r10,0x118(%r15)
+....................................................................................................
+ 11.71%  <total for region 2>
+
+....[Hottest Regions]...............................................................................
+ 87.03%           c2, level 4  org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 551 (260 bytes) 
+ 11.71%           c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 544 (75 bytes) 
+  0.17%     [kernel.kallsyms]  native_write_msr_safe+0xa (3 bytes) 
+  0.09%     [kernel.kallsyms]  ioread32+0x30 (0 bytes) 
+  0.06%                [i915]  hsw_unclaimed_reg_detect.isra.15+0x21 (0 bytes) 
+  0.04%     [kernel.kallsyms]  timerqueue_add+0x1d (22 bytes) 
+  0.04%     [kernel.kallsyms]  apic_timer_interrupt+0x0 (0 bytes) 
+  0.03%     [kernel.kallsyms]  update_curr+0x16 (11 bytes) 
+  0.03%     [kernel.kallsyms]  perf_event_task_tick+0x64 (22 bytes) 
+  0.02%     [kernel.kallsyms]  local_apic_timer_interrupt+0x26 (6 bytes) 
+  0.02%     [kernel.kallsyms]  update_blocked_averages+0x9e (0 bytes) 
+  0.02%     [kernel.kallsyms]  cpuacct_charge+0x11 (29 bytes) 
+  0.02%     [kernel.kallsyms]  _raw_spin_lock_irqsave+0x26 (0 bytes) 
+  0.02%     [kernel.kallsyms]  apic_timer_interrupt+0x77 (11 bytes) 
+  0.02%                [i915]  gen6_read32+0xbb (0 bytes) 
+  0.02%             libjvm.so  ElfSymbolTable::lookup+0x150 (19 bytes) 
+  0.01%     [kernel.kallsyms]  prepare_exit_to_usermode+0x6 (0 bytes) 
+  0.01%     [kernel.kallsyms]  x86_pmu_disable+0x0 (0 bytes) 
+  0.01%     [kernel.kallsyms]  native_read_msr_safe+0x8 (0 bytes) 
+  0.01%     [kernel.kallsyms]  __local_bh_enable_ip+0x32 (0 bytes) 
+  0.58%  <...other 53 warm regions...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Hottest Methods (after inlining)]..............................................................
+ 87.04%           c2, level 4  org.test.reactive.ArrayPublisherInline$ArraySubscription::slowPath, version 551 
+ 11.71%           c2, level 4  org.openjdk.jmh.infra.Blackhole::consume, version 544 
+  0.17%     [kernel.kallsyms]  native_write_msr_safe+0xa 
+  0.09%     [kernel.kallsyms]  ioread32+0x30 
+  0.06%                [i915]  hsw_unclaimed_reg_detect.isra.15+0x21 
+  0.04%     [kernel.kallsyms]  timerqueue_add+0x1d 
+  0.04%     [kernel.kallsyms]  apic_timer_interrupt+0x0 
+  0.03%     [kernel.kallsyms]  perf_event_task_tick+0x64 
+  0.03%     [kernel.kallsyms]  update_curr+0x16 
+  0.02%     [kernel.kallsyms]  apic_timer_interrupt+0x77 
+  0.02%     [kernel.kallsyms]  cpuacct_charge+0x11 
+  0.02%             libjvm.so  ElfSymbolTable::lookup+0x150 
+  0.02%     [kernel.kallsyms]  update_blocked_averages+0x9e 
+  0.02%     [kernel.kallsyms]  local_apic_timer_interrupt+0x26 
+  0.02%     [kernel.kallsyms]  _raw_spin_lock_irqsave+0x26 
+  0.02%                [i915]  gen6_read32+0xbb 
+  0.01%             libjvm.so  G1Analytics::predict_card_num+0x152 
+  0.01%     [kernel.kallsyms]  _raw_spin_lock_irq+0x6 
+  0.01%             libjvm.so  Thread::muxAcquire+0x19 
+  0.01%                 [kvm]  pvclock_gtod_notify+0x13 
+  0.57%  <...other 52 warm methods...>
+....................................................................................................
+ 99.99%  <totals>
+
+....[Distribution by Source]........................................................................
+ 98.76%           c2, level 4
+  0.91%     [kernel.kallsyms]
+  0.13%             libjvm.so
+  0.08%                [i915]
+  0.03%            [mac80211]
+  0.02%    libpthread-2.22.so
+  0.02%          libc-2.22.so
+  0.01%   [nf_conntrack_ipv4]
+  0.01%                 [kvm]
+  0.01%              [nf_nat]
+....................................................................................................
+ 99.99%  <totals>
+
+
+
+# Run complete. Total time: 00:04:53
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                               (times)   Mode  Cnt   Score   Error  Units
+ArrayPublisherPerfTest.publisherPerformance             1000000  thrpt    6  48.956 ± 1.568  ops/s
+ArrayPublisherPerfTest.publisherPerformance:·asm        1000000  thrpt          NaN            ---
+ArrayPublisherPerfTest.publisherPerformanceInline       1000000  thrpt    6  58.412 ± 1.966  ops/s
+ArrayPublisherPerfTest.publisherPerformanceInline:·asm  1000000  thrpt          NaN            ---
+
+Benchmark result is saved to /home/ivan/program/reactive-hardcore/build/reports/jmh/results.txt
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 5.0.
+See https://docs.gradle.org/4.8/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 4m 59s
+6 actionable tasks: 1 executed, 5 up-to-date
+

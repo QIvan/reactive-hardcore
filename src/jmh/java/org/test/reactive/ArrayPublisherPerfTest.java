@@ -18,10 +18,10 @@ import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.RunnerException;
 
 @BenchmarkMode(Mode.Throughput)
-@Warmup(iterations = 6)
+@Warmup(iterations = 2)
 @Measurement(iterations = 3, time = 3, timeUnit = TimeUnit.SECONDS)
 @OutputTimeUnit(TimeUnit.SECONDS)
-@Fork(value = 5)
+@Fork(value = 1)
 @State(Scope.Thread)
 public class ArrayPublisherPerfTest {
     @Param({ "1000000" })
