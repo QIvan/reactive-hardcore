@@ -1,0 +1,525 @@
+Classfile /home/ivan/program/reactive-hardcore/build/classes/java/jmh/org/test/reactive/ArrayPublisherInline$ArraySubscription.class
+  Last modified Dec 13, 2018; size 3181 bytes
+  MD5 checksum 367400f861b7e076b6f1a1b71545b2fd
+  Compiled from "ArrayPublisherInline.java"
+class org.test.reactive.ArrayPublisherInline$ArraySubscription<T extends java.lang.Object> extends java.lang.Object implements org.reactivestreams.Subscription
+  minor version: 0
+  major version: 55
+  flags: (0x0020) ACC_SUPER
+  this_class: #21                         // org/test/reactive/ArrayPublisherInline$ArraySubscription
+  super_class: #24                        // java/lang/Object
+  interfaces: 1, fields: 6, methods: 6, attributes: 4
+Constant pool:
+    #1 = Methodref          #24.#75       // java/lang/Object."<init>":()V
+    #2 = Fieldref           #21.#76       // org/test/reactive/ArrayPublisherInline$ArraySubscription.array:[Ljava/lang/Object;
+    #3 = Fieldref           #21.#77       // org/test/reactive/ArrayPublisherInline$ArraySubscription.subscriber:Lorg/reactivestreams/Subscriber;
+    #4 = Fieldref           #21.#78       // org/test/reactive/ArrayPublisherInline$ArraySubscription.REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+    #5 = Methodref          #79.#80       // java/util/concurrent/atomic/AtomicLongFieldUpdater.get:(Ljava/lang/Object;)J
+    #6 = Class              #81           // java/lang/Long
+    #7 = Long               9223372036854775807l
+    #9 = Methodref          #79.#82       // java/util/concurrent/atomic/AtomicLongFieldUpdater.compareAndSet:(Ljava/lang/Object;JJ)Z
+   #10 = Fieldref           #21.#83       // org/test/reactive/ArrayPublisherInline$ArraySubscription.index:I
+   #11 = Methodref          #21.#84       // org/test/reactive/ArrayPublisherInline$ArraySubscription.fastPath:()V
+   #12 = Methodref          #21.#85       // org/test/reactive/ArrayPublisherInline$ArraySubscription.slowPath:(J)V
+   #13 = Fieldref           #21.#86       // org/test/reactive/ArrayPublisherInline$ArraySubscription.canceled:Z
+   #14 = Class              #87           // java/lang/NullPointerException
+   #15 = Methodref          #14.#75       // java/lang/NullPointerException."<init>":()V
+   #16 = InterfaceMethodref #65.#88       // org/reactivestreams/Subscriber.onError:(Ljava/lang/Throwable;)V
+   #17 = InterfaceMethodref #65.#89       // org/reactivestreams/Subscriber.onNext:(Ljava/lang/Object;)V
+   #18 = InterfaceMethodref #65.#90       // org/reactivestreams/Subscriber.onComplete:()V
+   #19 = Fieldref           #21.#91       // org/test/reactive/ArrayPublisherInline$ArraySubscription.requested:J
+   #20 = Methodref          #79.#92       // java/util/concurrent/atomic/AtomicLongFieldUpdater.addAndGet:(Ljava/lang/Object;J)J
+   #21 = Class              #93           // org/test/reactive/ArrayPublisherInline$ArraySubscription
+   #22 = String             #37           // requested
+   #23 = Methodref          #79.#94       // java/util/concurrent/atomic/AtomicLongFieldUpdater.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+   #24 = Class              #95           // java/lang/Object
+   #25 = Class              #96           // org/reactivestreams/Subscription
+   #26 = Utf8               subscriber
+   #27 = Utf8               Lorg/reactivestreams/Subscriber;
+   #28 = Utf8               Signature
+   #29 = Utf8               Lorg/reactivestreams/Subscriber<-TT;>;
+   #30 = Utf8               array
+   #31 = Utf8               [Ljava/lang/Object;
+   #32 = Utf8               [TT;
+   #33 = Utf8               index
+   #34 = Utf8               I
+   #35 = Utf8               canceled
+   #36 = Utf8               Z
+   #37 = Utf8               requested
+   #38 = Utf8               J
+   #39 = Utf8               REQUESTED
+   #40 = Utf8               Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+   #41 = Utf8               ArraySubscription
+   #42 = Utf8               InnerClasses
+   #43 = Utf8               Ljava/util/concurrent/atomic/AtomicLongFieldUpdater<Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;>;
+   #44 = Utf8               <init>
+   #45 = Utf8               ([Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+   #46 = Utf8               Code
+   #47 = Utf8               LineNumberTable
+   #48 = Utf8               LocalVariableTable
+   #49 = Utf8               this
+   #50 = Utf8               Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+   #51 = Utf8               LocalVariableTypeTable
+   #52 = Utf8               Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+   #53 = Utf8               ([TT;Lorg/reactivestreams/Subscriber<-TT;>;)V
+   #54 = Utf8               request
+   #55 = Utf8               (J)V
+   #56 = Utf8               n
+   #57 = Utf8               initialRequested
+   #58 = Utf8               StackMapTable
+   #59 = Utf8               slowPath
+   #60 = Utf8               element
+   #61 = Utf8               Ljava/lang/Object;
+   #62 = Utf8               sent
+   #63 = Utf8               idx
+   #64 = Utf8               TT;
+   #65 = Class              #97           // org/reactivestreams/Subscriber
+   #66 = Utf8               fastPath
+   #67 = Utf8               ()V
+   #68 = Utf8               cancel
+   #69 = Utf8               <clinit>
+   #70 = Utf8               <T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/reactivestreams/Subscription;
+   #71 = Utf8               SourceFile
+   #72 = Utf8               ArrayPublisherInline.java
+   #73 = Utf8               NestHost
+   #74 = Class              #98           // org/test/reactive/ArrayPublisherInline
+   #75 = NameAndType        #44:#67       // "<init>":()V
+   #76 = NameAndType        #30:#31       // array:[Ljava/lang/Object;
+   #77 = NameAndType        #26:#27       // subscriber:Lorg/reactivestreams/Subscriber;
+   #78 = NameAndType        #39:#40       // REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+   #79 = Class              #99           // java/util/concurrent/atomic/AtomicLongFieldUpdater
+   #80 = NameAndType        #100:#101     // get:(Ljava/lang/Object;)J
+   #81 = Utf8               java/lang/Long
+   #82 = NameAndType        #102:#103     // compareAndSet:(Ljava/lang/Object;JJ)Z
+   #83 = NameAndType        #33:#34       // index:I
+   #84 = NameAndType        #66:#67       // fastPath:()V
+   #85 = NameAndType        #59:#55       // slowPath:(J)V
+   #86 = NameAndType        #35:#36       // canceled:Z
+   #87 = Utf8               java/lang/NullPointerException
+   #88 = NameAndType        #104:#105     // onError:(Ljava/lang/Throwable;)V
+   #89 = NameAndType        #106:#107     // onNext:(Ljava/lang/Object;)V
+   #90 = NameAndType        #108:#67      // onComplete:()V
+   #91 = NameAndType        #37:#38       // requested:J
+   #92 = NameAndType        #109:#110     // addAndGet:(Ljava/lang/Object;J)J
+   #93 = Utf8               org/test/reactive/ArrayPublisherInline$ArraySubscription
+   #94 = NameAndType        #111:#112     // newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+   #95 = Utf8               java/lang/Object
+   #96 = Utf8               org/reactivestreams/Subscription
+   #97 = Utf8               org/reactivestreams/Subscriber
+   #98 = Utf8               org/test/reactive/ArrayPublisherInline
+   #99 = Utf8               java/util/concurrent/atomic/AtomicLongFieldUpdater
+  #100 = Utf8               get
+  #101 = Utf8               (Ljava/lang/Object;)J
+  #102 = Utf8               compareAndSet
+  #103 = Utf8               (Ljava/lang/Object;JJ)Z
+  #104 = Utf8               onError
+  #105 = Utf8               (Ljava/lang/Throwable;)V
+  #106 = Utf8               onNext
+  #107 = Utf8               (Ljava/lang/Object;)V
+  #108 = Utf8               onComplete
+  #109 = Utf8               addAndGet
+  #110 = Utf8               (Ljava/lang/Object;J)J
+  #111 = Utf8               newUpdater
+  #112 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+{
+  int index;
+    descriptor: I
+    flags: (0x0000)
+
+  volatile boolean canceled;
+    descriptor: Z
+    flags: (0x0040) ACC_VOLATILE
+
+  volatile long requested;
+    descriptor: J
+    flags: (0x0040) ACC_VOLATILE
+
+  static final java.util.concurrent.atomic.AtomicLongFieldUpdater<org.test.reactive.ArrayPublisherInline$ArraySubscription> REQUESTED;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+    flags: (0x0018) ACC_STATIC, ACC_FINAL
+    Signature: #43                          // Ljava/util/concurrent/atomic/AtomicLongFieldUpdater<Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;>;
+
+  public org.test.reactive.ArrayPublisherInline$ArraySubscription(T[], org.reactivestreams.Subscriber<? super T>);
+    descriptor: ([Ljava/lang/Object;Lorg/reactivestreams/Subscriber;)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=3, args_size=3
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: putfield      #2                  // Field array:[Ljava/lang/Object;
+         9: aload_0
+        10: aload_2
+        11: putfield      #3                  // Field subscriber:Lorg/reactivestreams/Subscriber;
+        14: return
+      LineNumberTable:
+        line 45: 0
+        line 46: 4
+        line 47: 9
+        line 48: 14
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+            0      15     1 array   [Ljava/lang/Object;
+            0      15     2 subscriber   Lorg/reactivestreams/Subscriber;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      15     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+            0      15     1 array   [TT;
+            0      15     2 subscriber   Lorg/reactivestreams/Subscriber<-TT;>;
+    Signature: #53                          // ([TT;Lorg/reactivestreams/Subscriber<-TT;>;)V
+
+  public void request(long);
+    descriptor: (J)V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=6, locals=5, args_size=2
+         0: lload_1
+         1: lconst_0
+         2: lcmp
+         3: ifgt          7
+         6: return
+         7: getstatic     #4                  // Field REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+        10: aload_0
+        11: invokevirtual #5                  // Method java/util/concurrent/atomic/AtomicLongFieldUpdater.get:(Ljava/lang/Object;)J
+        14: lstore_3
+        15: lload_3
+        16: ldc2_w        #7                  // long 9223372036854775807l
+        19: lcmp
+        20: ifne          24
+        23: return
+        24: lload_3
+        25: lload_1
+        26: ladd
+        27: lstore_1
+        28: lload_1
+        29: lconst_0
+        30: lcmp
+        31: ifgt          38
+        34: ldc2_w        #7                  // long 9223372036854775807l
+        37: lstore_1
+        38: getstatic     #4                  // Field REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+        41: aload_0
+        42: lload_3
+        43: lload_1
+        44: invokevirtual #9                  // Method java/util/concurrent/atomic/AtomicLongFieldUpdater.compareAndSet:(Ljava/lang/Object;JJ)Z
+        47: ifeq          7
+        50: goto          53
+        53: lload_3
+        54: lconst_0
+        55: lcmp
+        56: ifle          60
+        59: return
+        60: lload_1
+        61: aload_0
+        62: getfield      #2                  // Field array:[Ljava/lang/Object;
+        65: arraylength
+        66: aload_0
+        67: getfield      #10                 // Field index:I
+        70: isub
+        71: i2l
+        72: lcmp
+        73: ifle          83
+        76: aload_0
+        77: invokevirtual #11                 // Method fastPath:()V
+        80: goto          88
+        83: aload_0
+        84: lload_1
+        85: invokevirtual #12                 // Method slowPath:(J)V
+        88: return
+      LineNumberTable:
+        line 54: 0
+        line 55: 6
+        line 61: 7
+        line 63: 15
+        line 64: 23
+        line 67: 24
+        line 69: 28
+        line 70: 34
+        line 73: 38
+        line 74: 50
+        line 78: 53
+        line 79: 59
+        line 82: 60
+        line 83: 76
+        line 85: 83
+        line 88: 88
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      89     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+            0      89     1     n   J
+           15      74     3 initialRequested   J
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0      89     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+      StackMapTable: number_of_entries = 7
+        frame_type = 7 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 16
+          locals = [ long ]
+        frame_type = 13 /* same */
+        frame_type = 14 /* same */
+        frame_type = 6 /* same */
+        frame_type = 22 /* same */
+        frame_type = 4 /* same */
+
+  void slowPath(long);
+    descriptor: (J)V
+    flags: (0x0000)
+    Code:
+      stack=4, locals=7, args_size=2
+         0: iconst_0
+         1: istore_3
+         2: aload_0
+         3: getfield      #10                 // Field index:I
+         6: istore        4
+         8: aload_0
+         9: getfield      #3                  // Field subscriber:Lorg/reactivestreams/Subscriber;
+        12: astore        5
+        14: iload_3
+        15: i2l
+        16: lload_1
+        17: lcmp
+        18: ifge          86
+        21: iload         4
+        23: aload_0
+        24: getfield      #2                  // Field array:[Ljava/lang/Object;
+        27: arraylength
+        28: if_icmpge     86
+        31: aload_0
+        32: getfield      #13                 // Field canceled:Z
+        35: ifeq          39
+        38: return
+        39: aload_0
+        40: getfield      #2                  // Field array:[Ljava/lang/Object;
+        43: iload         4
+        45: aaload
+        46: astore        6
+        48: aload         6
+        50: ifnonnull     68
+        53: aload         5
+        55: new           #14                 // class java/lang/NullPointerException
+        58: dup
+        59: invokespecial #15                 // Method java/lang/NullPointerException."<init>":()V
+        62: invokeinterface #16,  2           // InterfaceMethod org/reactivestreams/Subscriber.onError:(Ljava/lang/Throwable;)V
+        67: return
+        68: aload         5
+        70: aload         6
+        72: invokeinterface #17,  2           // InterfaceMethod org/reactivestreams/Subscriber.onNext:(Ljava/lang/Object;)V
+        77: iinc          3, 1
+        80: iinc          4, 1
+        83: goto          14
+        86: aload_0
+        87: getfield      #13                 // Field canceled:Z
+        90: ifeq          94
+        93: return
+        94: iload         4
+        96: aload_0
+        97: getfield      #2                  // Field array:[Ljava/lang/Object;
+       100: arraylength
+       101: if_icmpne     112
+       104: aload         5
+       106: invokeinterface #18,  1           // InterfaceMethod org/reactivestreams/Subscriber.onComplete:()V
+       111: return
+       112: aload_0
+       113: getfield      #19                 // Field requested:J
+       116: lstore_1
+       117: lload_1
+       118: iload_3
+       119: i2l
+       120: lcmp
+       121: ifne          148
+       124: aload_0
+       125: iload         4
+       127: putfield      #10                 // Field index:I
+       130: getstatic     #4                  // Field REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+       133: aload_0
+       134: iload_3
+       135: ineg
+       136: i2l
+       137: invokevirtual #20                 // Method java/util/concurrent/atomic/AtomicLongFieldUpdater.addAndGet:(Ljava/lang/Object;J)J
+       140: lstore_1
+       141: lload_1
+       142: lconst_0
+       143: lcmp
+       144: ifne          148
+       147: return
+       148: iconst_0
+       149: istore_3
+       150: goto          14
+      LineNumberTable:
+        line 91: 0
+        line 92: 2
+        line 93: 8
+        line 96: 14
+        line 97: 31
+        line 98: 38
+        line 101: 39
+        line 103: 48
+        line 104: 53
+        line 105: 67
+        line 108: 68
+        line 96: 77
+        line 111: 86
+        line 112: 93
+        line 115: 94
+        line 116: 104
+        line 117: 111
+        line 120: 112
+        line 122: 117
+        line 123: 124
+        line 124: 130
+        line 125: 141
+        line 126: 147
+        line 130: 148
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           48      29     6 element   Ljava/lang/Object;
+            0     153     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+            0     153     1     n   J
+            2     151     3  sent   I
+            8     145     4   idx   I
+           14     139     5 subscriber   Lorg/reactivestreams/Subscriber;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           48      29     6 element   TT;
+            0     153     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+           14     139     5 subscriber   Lorg/reactivestreams/Subscriber<-TT;>;
+      StackMapTable: number_of_entries = 7
+        frame_type = 254 /* append */
+          offset_delta = 14
+          locals = [ int, int, class org/reactivestreams/Subscriber ]
+        frame_type = 24 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 28
+          locals = [ class java/lang/Object ]
+        frame_type = 250 /* chop */
+          offset_delta = 17
+        frame_type = 7 /* same */
+        frame_type = 17 /* same */
+        frame_type = 35 /* same */
+
+  void fastPath();
+    descriptor: ()V
+    flags: (0x0000)
+    Code:
+      stack=3, locals=4, args_size=1
+         0: aload_0
+         1: getfield      #10                 // Field index:I
+         4: istore_1
+         5: aload_0
+         6: getfield      #3                  // Field subscriber:Lorg/reactivestreams/Subscriber;
+         9: astore_2
+        10: iload_1
+        11: aload_0
+        12: getfield      #2                  // Field array:[Ljava/lang/Object;
+        15: arraylength
+        16: if_icmpge     65
+        19: aload_0
+        20: getfield      #13                 // Field canceled:Z
+        23: ifeq          27
+        26: return
+        27: aload_0
+        28: getfield      #2                  // Field array:[Ljava/lang/Object;
+        31: iload_1
+        32: aaload
+        33: astore_3
+        34: aload_3
+        35: ifnonnull     52
+        38: aload_2
+        39: new           #14                 // class java/lang/NullPointerException
+        42: dup
+        43: invokespecial #15                 // Method java/lang/NullPointerException."<init>":()V
+        46: invokeinterface #16,  2           // InterfaceMethod org/reactivestreams/Subscriber.onError:(Ljava/lang/Throwable;)V
+        51: return
+        52: aload_2
+        53: aload_3
+        54: invokeinterface #17,  2           // InterfaceMethod org/reactivestreams/Subscriber.onNext:(Ljava/lang/Object;)V
+        59: iinc          1, 1
+        62: goto          10
+        65: aload_0
+        66: getfield      #13                 // Field canceled:Z
+        69: ifeq          73
+        72: return
+        73: aload_2
+        74: invokeinterface #18,  1           // InterfaceMethod org/reactivestreams/Subscriber.onComplete:()V
+        79: return
+      LineNumberTable:
+        line 135: 0
+        line 136: 5
+        line 138: 10
+        line 139: 19
+        line 140: 26
+        line 143: 27
+        line 145: 34
+        line 146: 38
+        line 147: 51
+        line 150: 52
+        line 138: 59
+        line 153: 65
+        line 154: 72
+        line 157: 73
+        line 158: 79
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           34      25     3 element   Ljava/lang/Object;
+            0      80     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+            5      75     1   idx   I
+           10      70     2 subscriber   Lorg/reactivestreams/Subscriber;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+           34      25     3 element   TT;
+            0      80     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+           10      70     2 subscriber   Lorg/reactivestreams/Subscriber<-TT;>;
+      StackMapTable: number_of_entries = 5
+        frame_type = 253 /* append */
+          offset_delta = 10
+          locals = [ int, class org/reactivestreams/Subscriber ]
+        frame_type = 16 /* same */
+        frame_type = 252 /* append */
+          offset_delta = 24
+          locals = [ class java/lang/Object ]
+        frame_type = 250 /* chop */
+          offset_delta = 12
+        frame_type = 7 /* same */
+
+  public void cancel();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: iconst_1
+         2: putfield      #13                 // Field canceled:Z
+         5: return
+      LineNumberTable:
+        line 162: 0
+        line 163: 5
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription;
+      LocalVariableTypeTable:
+        Start  Length  Slot  Name   Signature
+            0       6     0  this   Lorg/test/reactive/ArrayPublisherInline$ArraySubscription<TT;>;
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=2, locals=0, args_size=0
+         0: ldc           #21                 // class org/test/reactive/ArrayPublisherInline$ArraySubscription
+         2: ldc           #22                 // String requested
+         4: invokestatic  #23                 // Method java/util/concurrent/atomic/AtomicLongFieldUpdater.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+         7: putstatic     #4                  // Field REQUESTED:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;
+        10: return
+      LineNumberTable:
+        line 42: 0
+        line 43: 4
+        line 42: 10
+}
+Signature: #70                          // <T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/reactivestreams/Subscription;
+SourceFile: "ArrayPublisherInline.java"
+Error: unknown attribute
+  NestHost: length = 0x2
+   00 4A
